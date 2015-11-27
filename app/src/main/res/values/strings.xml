@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- TITLE APP-->
+    <string name="app_name">Weather In Cherkasy</string>
+
+    <!-- ALERT DIALOG -->
+    <string name="offline_mode">Offline Mode</string>
+
+</resources>
