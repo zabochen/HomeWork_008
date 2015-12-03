@@ -86,25 +86,25 @@ public class FragmentContent extends Fragment
         // WIND SPEED
         TextView windSpeed = (TextView) fragmentContentView.findViewById(R.id.item_wind_speed);
         StringBuilder sbWindSpeed = new StringBuilder();
-        sbWindSpeed.append("Wind Speed: ").append((int)selectedRealmWeather.getWindSpeed()).append(" meter/sec");
+        sbWindSpeed.append("Wind Speed: ").append((int) selectedRealmWeather.getWindSpeed()).append(" meter/sec");
         windSpeed.setText(sbWindSpeed.toString());
 
         // CLOUDS
         TextView cloudsAll = (TextView) fragmentContentView.findViewById(R.id.item_clouds_all);
         StringBuilder sbClouds = new StringBuilder();
-        sbClouds.append("Cloudiness: ").append((int)selectedRealmWeather.getClouds()).append("%");
+        sbClouds.append("Cloudiness: ").append((int) selectedRealmWeather.getClouds()).append("%");
         cloudsAll.setText(sbClouds.toString());
 
         // HUMIDITY
         TextView humidity = (TextView) fragmentContentView.findViewById(R.id.item_humidity);
         StringBuilder sbHumidity = new StringBuilder();
-        sbHumidity.append("Humidity: ").append((int)selectedRealmWeather.getHumidity()).append("%");
+        sbHumidity.append("Humidity: ").append((int) selectedRealmWeather.getHumidity()).append("%");
         humidity.setText(sbHumidity.toString());
 
         // PRESSURE
         TextView pressure = (TextView) fragmentContentView.findViewById(R.id.item_pressure);
         StringBuilder sbPressure = new StringBuilder();
-        sbPressure.append("Pressure: ").append((int)selectedRealmWeather.getPressure()).append(" hPa");
+        sbPressure.append("Pressure: ").append((int) selectedRealmWeather.getPressure()).append(" hPa");
         pressure.setText(sbPressure.toString());
 
         return fragmentContentView;

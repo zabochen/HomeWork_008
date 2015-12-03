@@ -28,7 +28,6 @@ public class FragmentItems extends ListFragment
     private Realm realm;
     private ItemSelectedListener itemSelectedListener;
     private MyRealmBaseAdapter adapter;
-    private static final String BASE_URL = WeatherCity.getURL();
 
     @Override
     public void onAttach(Context context)
@@ -42,12 +41,12 @@ public class FragmentItems extends ListFragment
     {
         super.onViewCreated(view, savedInstanceState);
 
+        // ASYNC TASK -> LOAD & PARSE & ADD
+        new GetWeatherDate().execute();
+
         // REALM INSTANCE
         realm = Realm.getInstance(getContext());
         RealmResults<RealmWeather> realmResults = realm.where(RealmWeather.class).findAll();
-
-        // ASYNC TASK -> LOAD & PARSE & ADD
-        new GetWeatherDate().execute();
 
         // ADAPTER
         adapter = new MyRealmBaseAdapter(getActivity(), realmResults, true);
@@ -66,7 +65,6 @@ public class FragmentItems extends ListFragment
     // ASYNC TASK
     public class GetWeatherDate extends AsyncTask<Void, Void, Void>
     {
-
         @Override
         protected Void doInBackground(Void... params)
         {
@@ -78,7 +76,7 @@ public class FragmentItems extends ListFragment
             try
             {
                 // CONNECTION
-                URL baseUrl = new URL(BASE_URL);
+                URL baseUrl = new URL(WeatherCity.getURL());
                 connection = (HttpURLConnection) baseUrl.openConnection();
                 connection.setRequestMethod("GET");
                 connection.connect();
@@ -148,6 +146,16 @@ public class FragmentItems extends ListFragment
                     realm.copyToRealmOrUpdate(realmWeather);
                     realm.commitTransaction();
                 }
+
+                // CLEAR DATA
+                realm.beginTransaction();
+                RealmResults<RealmWeather> realmResults = realm.where(RealmWeather.class).findAll();
+                int dataSize = realmResults.size() - 40;
+                for (int i = 0; i < dataSize; i++)
+                {
+                    realmResults.remove(0);
+                }
+                realm.commitTransaction();
             }
             catch (IOException e)
             {

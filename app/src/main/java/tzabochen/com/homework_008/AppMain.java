@@ -2,22 +2,28 @@ package tzabochen.com.homework_008;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import tzabochen.com.homework_008.preferences.ActivityPreferences;
 
 public class AppMain extends AppCompatActivity implements ItemSelectedListener
 {
     // VALUE'S
-    private int itemPosition = 0;           // ITEM SELECTED BY DEFAULT
-    private boolean withContent = true;     // SHOW TWO-PANE LAYOUT
+    private int itemPosition = 0;                       // ITEM SELECTED BY DEFAULT
+    private boolean withContent = true;                 // SHOW TWO-PANE LAYOUT
+    private SharedPreferences sharedPreferences;        // PREFERENCES
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +31,10 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        // PREFERENCES
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        WeatherCity.city = sharedPreferences.getString("preferences_city", "Cherkasy");
 
         // CONNECTION
         if (!connectionStatus())
@@ -41,6 +51,7 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener
         {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.app_name);
+            actionBar.setSubtitle(WeatherCity.city);
         }
 
         // LOAD SAVED ITEM POSITION
@@ -64,6 +75,14 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener
     {
         super.onSaveInstanceState(outState);
         outState.putInt("itemPosition", itemPosition);
+    }
+
+    // MENU
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
     }
 
     // GET ITEM POSITION WITH ITEM FRAGMENT
@@ -97,6 +116,7 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener
         }
     }
 
+    // CONNECTION STATUS
     private boolean connectionStatus()
     {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
@@ -114,15 +134,23 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener
 
     private void offlineModeMessage()
     {
-        Toast.makeText(this, R.string.offline_mode, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.offline_mode, Toast.LENGTH_SHORT).show();
     }
 
+    // TOOLBAR MENU
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
         switch (item.getItemId())
         {
-            case android.R.id.home: this.finish(); break;
+            case android.R.id.home:
+                this.finish();
+                break;
+
+            case R.id.menu_item_preferences:
+                Intent intent = new Intent(this, ActivityPreferences.class);
+                startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
