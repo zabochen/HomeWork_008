@@ -1,4 +1,4 @@
-package tzabochen.com.homework_008;
+package tzabochen.com.homework_008.fragments;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import tzabochen.com.homework_008.R;
+import tzabochen.com.homework_008.tools.WeatherCity;
 
 public class ActivityContent extends AppCompatActivity
 {

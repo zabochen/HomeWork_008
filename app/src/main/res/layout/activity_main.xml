@@ -27,7 +27,7 @@
 
         <fragment
             android:id="@+id/main_fragment_items"
-            android:name="tzabochen.com.homework_008.FragmentItems"
+            android:name="tzabochen.com.homework_008.fragments.FragmentItems"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"/>

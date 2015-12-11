@@ -1,4 +1,4 @@
-package tzabochen.com.homework_008;
+package tzabochen.com.homework_008.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +13,9 @@ import com.squareup.picasso.Picasso;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import tzabochen.com.homework_008.R;
+import tzabochen.com.homework_008.realm.RealmWeather;
+import tzabochen.com.homework_008.tools.WeatherDate;
 
 public class FragmentContent extends Fragment
 {

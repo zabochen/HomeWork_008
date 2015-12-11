@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import tzabochen.com.homework_008.R;
-import tzabochen.com.homework_008.WeatherCity;
+import tzabochen.com.homework_008.tools.WeatherCity;
 
 public class ActivityPreferences extends AppCompatActivity
 {

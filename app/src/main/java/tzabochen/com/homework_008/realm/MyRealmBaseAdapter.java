@@ -1,18 +1,19 @@
-package tzabochen.com.homework_008;
+package tzabochen.com.homework_008.realm;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import io.realm.RealmBaseAdapter;
 import io.realm.RealmResults;
+import tzabochen.com.homework_008.R;
+import tzabochen.com.homework_008.tools.WeatherDate;
 
-public class MyRealmBaseAdapter extends RealmBaseAdapter<RealmWeather> implements ListAdapter
+public class MyRealmBaseAdapter extends RealmBaseAdapter<RealmWeather>
 {
     private Context context;
 
@@ -63,7 +64,7 @@ public class MyRealmBaseAdapter extends RealmBaseAdapter<RealmWeather> implement
 
             // TEMPERATURE
             double temp = realmWeather.getTemp();
-            viewHolder.temp.setText(String.valueOf((int)temp) + "°C");
+            viewHolder.temp.setText(String.valueOf((int) temp) + "°C");
 
             // ICON
             String iconUrl = "http://openweathermap.org/img/w/" + realmWeather.getIcon() + ".png";

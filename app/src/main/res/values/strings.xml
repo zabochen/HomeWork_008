@@ -8,5 +8,40 @@
 
     <!-- MENU -->
     <string name="menu_item_preferences">Preferences</string>
+    <string name="menu_item_refresh">Refresh</string>
+
+    <!-- NOTIFICATION -->
+    <string name="notification_content_text">New Updates Available</string>
+    <string name="notification_action_update">Update</string>
+
+    <!-- CITIES -->
+    <string-array name="cities">
+        <item>Cherkasy</item>
+        <item>Chernihiv</item>
+        <item>Chernivtsi</item>
+        <item>Dnipropetrovsk</item>
+        <item>Donetsk</item>
+        <item>Ivano-Frankivsk</item>
+        <item>Kharkiv</item>
+        <item>Kherson</item>
+        <item>Khmelnytskyy</item>
+        <item>Kiev</item>
+        <item>Kirovohrad</item>
+        <item>Luhansk</item>
+        <item>Lutsk</item>
+        <item>Lviv</item>
+        <item>Mykolayiv</item>
+        <item>Odessa</item>
+        <item>Poltava</item>
+        <item>Rivne</item>
+        <item>Sevastopol</item>
+        <item>Simferopol</item>
+        <item>Sumy</item>
+        <item>Ternopil</item>
+        <item>Uzhhorod</item>
+        <item>Vinnytsya</item>
+        <item>Zaporizhzhya</item>
+        <item>Zhytomyr</item>
+    </string-array>
 
 </resources>

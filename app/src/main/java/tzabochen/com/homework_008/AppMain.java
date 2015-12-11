@@ -16,9 +16,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import tzabochen.com.homework_008.fragments.ActivityContent;
+import tzabochen.com.homework_008.fragments.FragmentContent;
 import tzabochen.com.homework_008.preferences.ActivityPreferences;
+import tzabochen.com.homework_008.realm.GetWeatherDate;
+import tzabochen.com.homework_008.services.NotificationService;
+import tzabochen.com.homework_008.tools.ItemSelectedListener;
+import tzabochen.com.homework_008.tools.WeatherCity;
 
-public class AppMain extends AppCompatActivity implements ItemSelectedListener
+public class AppMain extends AppCompatActivity implements ItemSelectedListener,
+        SharedPreferences.OnSharedPreferenceChangeListener
 {
     // VALUE'S
     private int itemPosition = 0;                       // ITEM SELECTED BY DEFAULT
@@ -32,9 +39,15 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener
 
         setContentView(R.layout.activity_main);
 
+        // SERVICE
+        if (savedInstanceState == null && connectionStatus())
+        {
+            startService(new Intent(this, NotificationService.class));
+        }
+
         // PREFERENCES
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        WeatherCity.city = sharedPreferences.getString("preferences_city", "Cherkasy");
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         // CONNECTION
         if (!connectionStatus())
@@ -151,7 +164,27 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener
                 Intent intent = new Intent(this, ActivityPreferences.class);
                 startActivity(intent);
                 break;
+
+            case R.id.menu_item_refresh:
+                new GetWeatherDate().execute(this);
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
+    {
+        if (key.equals("preferences_updates"))
+        {
+            if (sharedPreferences.getBoolean("preferences_updates", true))
+            {
+                startService(new Intent(this, NotificationService.class));
+            }
+            else
+            {
+                stopService(new Intent(this, NotificationService.class));
+            }
+        }
     }
 }

@@ -6,10 +6,27 @@
         android:key="category_1"
         android:title="Preferences">
 
-        <EditTextPreference
-            android:key="preferences_city"
-            android:summary="Type the name of your city"
-            android:title="City"/>
+        <ListPreference
+            android:key="preferences_cities"
+            android:entries="@array/cities"
+            android:entryValues="@array/cities"
+            android:title="Cities"
+            android:summary="Select The City"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="category_2"
+        android:title="Service Updates">
+
+        <SwitchPreference
+            android:key="preferences_updates"
+            android:title="Status:"
+            android:switchTextOn="On"
+            android:switchTextOff="Off"
+            android:summaryOn="Updates Enabled"
+            android:summaryOff="Updates Disabled"
+            android:defaultValue="true"/>
 
     </PreferenceCategory>
 
