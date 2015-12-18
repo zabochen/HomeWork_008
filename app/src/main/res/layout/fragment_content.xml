@@ -2,165 +2,176 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:weather_app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
     android:gravity="center">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
+        android:id="@+id/list_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/item_day_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="15dp"
-            android:textSize="@dimen/font_size_20"
-            android:textStyle="bold"/>
-
-        <View style="@style/Divider"/>
-
-        <ImageView
-            android:id="@+id/item_icon"
-            android:layout_width="110dp"
-            android:layout_height="110dp"/>
-
-        <TextView
-            android:id="@+id/item_icon_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:textSize="@dimen/font_size_18"/>
-
-        <View style="@style/Divider"/>
+        weather_app:cardCornerRadius="15dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/temp_max"/>
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/item_temp_max"
-                style="@style/FragmentTextStyle"
+                android:id="@+id/item_day_month"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:textSize="@dimen/font_size_20"
+                android:textStyle="bold"/>
+
+            <View style="@style/Divider"/>
+
+            <ImageView
+                android:id="@+id/item_icon"
+                android:layout_width="110dp"
+                android:layout_height="110dp"/>
+
+            <TextView
+                android:id="@+id/item_icon_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/font_size_18"/>
+
+            <View style="@style/Divider"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/temp_max"/>
+
+                <TextView
+                    android:id="@+id/item_temp_max"
+                    style="@style/FragmentTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <View style="@style/Divider"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/temp_min"/>
+
+                <TextView
+                    android:id="@+id/item_temp_min"
+                    style="@style/FragmentTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <View style="@style/Divider"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/wind_speed"/>
+
+                <TextView
+                    android:id="@+id/item_wind_speed"
+                    style="@style/FragmentTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <View style="@style/Divider"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/clouds"/>
+
+                <TextView
+                    android:id="@+id/item_clouds_all"
+                    style="@style/FragmentTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <View style="@style/Divider"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/humidity"/>
+
+                <TextView
+                    android:id="@+id/item_humidity"
+                    style="@style/FragmentTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <View style="@style/Divider"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/pressure"/>
+
+                <TextView
+                    android:id="@+id/item_pressure"
+                    style="@style/FragmentTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <View style="@style/Divider"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/temp_min"/>
-
-            <TextView
-                android:id="@+id/item_temp_min"
-                style="@style/FragmentTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <View style="@style/Divider"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/wind_speed"/>
-
-            <TextView
-                android:id="@+id/item_wind_speed"
-                style="@style/FragmentTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <View style="@style/Divider"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/clouds"/>
-
-            <TextView
-                android:id="@+id/item_clouds_all"
-                style="@style/FragmentTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <View style="@style/Divider"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/humidity"/>
-
-            <TextView
-                android:id="@+id/item_humidity"
-                style="@style/FragmentTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <View style="@style/Divider"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/pressure"/>
-
-            <TextView
-                android:id="@+id/item_pressure"
-                style="@style/FragmentTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </ScrollView>

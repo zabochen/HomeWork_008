@@ -42,7 +42,12 @@ public class WeatherDate
         return String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
     }
 
-    public String getDayOfWeek()
+    public String getDayOfWeekShort()
+    {
+        return String.valueOf(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.ENGLISH));
+    }
+
+    public String getDayOfWeekLong()
     {
         return String.valueOf(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH));
     }

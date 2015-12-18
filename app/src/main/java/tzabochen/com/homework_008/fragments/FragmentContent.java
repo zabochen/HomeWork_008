@@ -59,7 +59,7 @@ public class FragmentContent extends Fragment
         StringBuilder sbDayMonth = new StringBuilder();
         sbDayMonth.append(weatherDate.getDayOfMonth()).append(" ")
                 .append(weatherDate.getMonth()).append(", ")
-                .append(weatherDate.getDayOfWeek());
+                .append(weatherDate.getDayOfWeekLong());
         dayMonth.setText(sbDayMonth.toString());
 
         // ICON

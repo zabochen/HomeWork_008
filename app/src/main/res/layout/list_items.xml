@@ -1,74 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:weather_app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/list_card_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    weather_app:cardCornerRadius="15dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/list_day_of_week"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:textSize="@dimen/font_size_16"
-            android:textStyle="bold"/>
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/list_day_of_month"
+            <TextView
+                android:id="@+id/list_day_of_week_and_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:textSize="@dimen/font_size_18"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/list_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_16"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:textSize="@dimen/font_size_18"
-            android:textStyle="bold"/>
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/list_month"
+            <ImageView
+                android:id="@+id/list_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:textSize="@dimen/font_size_16"/>
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/list_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:textSize="@dimen/font_size_18"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/list_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_size_16"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/list_icon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/list_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_18"
-            android:textStyle="bold"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</android.support.v7.widget.CardView>

@@ -45,6 +45,18 @@
             android:enabled="true"
             android:exported="true"/>
 
+        <!-- BROADCAST RECEIVER -->
+        <receiver
+            android:name=".receivers.NotificationReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="tzabochen.com.notification.update"/>
+                <action android:name="tzabochen.com.notification.cancel"/>
+                <action android:name="tzabochen.com.actionbar.subtitle"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

@@ -1,10 +1,7 @@
 package tzabochen.com.homework_008;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
@@ -19,8 +16,10 @@ import android.widget.Toast;
 import tzabochen.com.homework_008.fragments.ActivityContent;
 import tzabochen.com.homework_008.fragments.FragmentContent;
 import tzabochen.com.homework_008.preferences.ActivityPreferences;
-import tzabochen.com.homework_008.realm.GetWeatherDate;
+import tzabochen.com.homework_008.realm.GetWeatherDateProgress;
+import tzabochen.com.homework_008.receivers.NotificationReceiver;
 import tzabochen.com.homework_008.services.NotificationService;
+import tzabochen.com.homework_008.tools.ConnectionStatus;
 import tzabochen.com.homework_008.tools.ItemSelectedListener;
 import tzabochen.com.homework_008.tools.WeatherCity;
 
@@ -31,6 +30,8 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener,
     private int itemPosition = 0;                       // ITEM SELECTED BY DEFAULT
     private boolean withContent = true;                 // SHOW TWO-PANE LAYOUT
     private SharedPreferences sharedPreferences;        // PREFERENCES
+    private ConnectionStatus connectionStatus;
+    public static ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,10 +40,17 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener,
 
         setContentView(R.layout.activity_main);
 
+        // CONNECTION
+        connectionStatus = new ConnectionStatus(this);
+
         // SERVICE
-        if (savedInstanceState == null && connectionStatus())
+        if (savedInstanceState == null && connectionStatus.getStatus())
         {
             startService(new Intent(this, NotificationService.class));
+        }
+        else if (!connectionStatus.getStatus())
+        {
+            stopService(new Intent(this, NotificationService.class));
         }
 
         // PREFERENCES
@@ -50,7 +58,7 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener,
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         // CONNECTION
-        if (!connectionStatus())
+        if (!connectionStatus.getStatus())
         {
             offlineModeMessage();
         }
@@ -59,7 +67,8 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener,
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
+
         if (actionBar != null)
         {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -129,22 +138,6 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener,
         }
     }
 
-    // CONNECTION STATUS
-    private boolean connectionStatus()
-    {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-        if (networkInfo != null && networkInfo.isConnected())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     private void offlineModeMessage()
     {
         Toast.makeText(this, R.string.offline_mode, Toast.LENGTH_SHORT).show();
@@ -166,7 +159,10 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener,
                 break;
 
             case R.id.menu_item_refresh:
-                new GetWeatherDate().execute(this);
+                if (connectionStatus.getStatus())
+                {
+                    new GetWeatherDateProgress(this).execute(this);
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -185,6 +181,10 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener,
             {
                 stopService(new Intent(this, NotificationService.class));
             }
+        }
+        else if (key.equals("preferences_cities"))
+        {
+            sendBroadcast(new Intent(NotificationReceiver.ACTIONBAR_SUBTITLE));
         }
     }
 }

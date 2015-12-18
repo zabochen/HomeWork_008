@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,15 +19,29 @@ import java.net.URL;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import tzabochen.com.homework_008.R;
 import tzabochen.com.homework_008.fragments.FragmentItems;
 import tzabochen.com.homework_008.tools.WeatherCity;
 
 public class GetWeatherDate extends AsyncTask<Context, Void, Void>
 {
+    private Context context;
+
+    public GetWeatherDate()
+    {
+    }
+
+    @Override
+    protected void onPreExecute()
+    {
+        super.onPreExecute();
+    }
+
     @Override
     protected Void doInBackground(Context... params)
     {
         // VALUE'S
+        this.context = params[0];
         Realm realm = Realm.getInstance(params[0]);
         HttpURLConnection connection = null;
         InputStream inputStream = null;
@@ -157,10 +172,18 @@ public class GetWeatherDate extends AsyncTask<Context, Void, Void>
         return null;
     }
 
-    // REFRESH
     @Override
     protected void onPostExecute(Void aVoid)
     {
+        // REFRESH ADAPTER
         FragmentItems.adapter.notifyDataSetChanged();
+
+        // SHOW TOAST
+        StringBuilder updateCompleted = new StringBuilder()
+                .append(context.getString(R.string.app_name))
+                .append(": ")
+                .append(context.getString(R.string.toast_update_completed));
+
+        Toast.makeText(context, updateCompleted.toString(), Toast.LENGTH_SHORT).show();
     }
 }

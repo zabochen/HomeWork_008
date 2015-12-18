@@ -14,13 +14,13 @@ import java.util.TimerTask;
 
 import tzabochen.com.homework_008.AppMain;
 import tzabochen.com.homework_008.R;
+import tzabochen.com.homework_008.receivers.NotificationReceiver;
 
 public class NotificationTimerTask extends TimerTask
 {
     // VALUE'S
-    private static final int NOTIFICATION_ID = 10;
+    public static final int NOTIFICATION_ID = 10;
     private Context context;
-    private static int counter = 0;
 
     private Handler handler = new Handler();
 
@@ -37,13 +37,19 @@ public class NotificationTimerTask extends TimerTask
             @Override
             public void run()
             {
+                // INTENT'S
                 Intent intent = new Intent(context, AppMain.class);
+                Intent intentUpdate = new Intent(NotificationReceiver.NOTIFICATION_UPDATE);
+                Intent intentCancel = new Intent(NotificationReceiver.NOTIFICATION_CANCEL);
 
                 TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(context);
                 taskStackBuilder.addParentStack(AppMain.class);
                 taskStackBuilder.addNextIntent(intent);
 
+                // PENDING INTENT'S
                 PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pendingIntentUpdate = PendingIntent.getBroadcast(context, 0, intentUpdate, PendingIntent.FLAG_CANCEL_CURRENT);
+                PendingIntent pendingIntentCancel = PendingIntent.getBroadcast(context, 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
 
                 NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context);
                 notificationBuilder.setContentIntent(pendingIntent)
@@ -51,8 +57,8 @@ public class NotificationTimerTask extends TimerTask
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
                         .setContentTitle(context.getString(R.string.app_name))
                         .setContentText(context.getString(R.string.notification_content_text))
-                        .addAction(R.mipmap.ic_check_white_24dp, context.getString(R.string.notification_action_update), pendingIntent)
-                        .setNumber(++counter)
+                        .addAction(R.mipmap.ic_check_white_24dp, context.getString(R.string.notification_action_update), pendingIntentUpdate)
+                        .addAction(R.mipmap.ic_close_white_24dp, context.getString(R.string.notification_action_cancel), pendingIntentCancel)
                         .setAutoCancel(true);
 
                 Notification notification = notificationBuilder.build();

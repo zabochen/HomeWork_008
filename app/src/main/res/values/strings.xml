@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- TITLE APP-->
+    <!-- TITLE APP -->
     <string name="app_name">WeatherApp</string>
 
     <!-- ALERT DIALOG -->
@@ -13,6 +13,13 @@
     <!-- NOTIFICATION -->
     <string name="notification_content_text">New Updates Available</string>
     <string name="notification_action_update">Update</string>
+    <string name="notification_action_cancel">Cancel</string>
+
+    <!-- GET WEATHER DATE -->
+    <string name="toast_update_completed">Update Completed</string>
+
+    <!-- PROGRESS DIALOG -->
+    <string name="progress_dialog">Loading...</string>
 
     <!-- CITIES -->
     <string-array name="cities">

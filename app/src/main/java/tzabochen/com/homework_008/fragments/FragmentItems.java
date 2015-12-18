@@ -12,6 +12,7 @@ import io.realm.RealmResults;
 import tzabochen.com.homework_008.realm.GetWeatherDate;
 import tzabochen.com.homework_008.realm.MyRealmBaseAdapter;
 import tzabochen.com.homework_008.realm.RealmWeather;
+import tzabochen.com.homework_008.tools.ConnectionStatus;
 import tzabochen.com.homework_008.tools.ItemSelectedListener;
 
 public class FragmentItems extends ListFragment
@@ -20,6 +21,7 @@ public class FragmentItems extends ListFragment
     private Realm realm;
     private ItemSelectedListener itemSelectedListener;
     public static MyRealmBaseAdapter adapter;
+    private ConnectionStatus connectionStatus;
 
     @Override
     public void onAttach(Context context)
@@ -33,8 +35,17 @@ public class FragmentItems extends ListFragment
     {
         super.onViewCreated(view, savedInstanceState);
 
+        // CONNECTION
+        connectionStatus = new ConnectionStatus(getContext());
+
+        // DISABLE DIVIDER
+        getListView().setDivider(null);
+
         // ASYNC TASK -> LOAD & PARSE & ADD & CLEAR
-        new GetWeatherDate().execute(getContext());
+        if(connectionStatus.getStatus())
+        {
+            new GetWeatherDate().execute(getContext());
+        }
 
         // REALM INSTANCE
         realm = Realm.getInstance(getContext());

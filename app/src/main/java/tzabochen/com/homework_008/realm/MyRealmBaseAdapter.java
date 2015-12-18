@@ -35,8 +35,7 @@ public class MyRealmBaseAdapter extends RealmBaseAdapter<RealmWeather>
             viewHolder = new ViewHolder();
 
             // DATE
-            viewHolder.dayOfWeek = (TextView) convertView.findViewById(R.id.list_day_of_week);
-            viewHolder.dayOfMonth = (TextView) convertView.findViewById(R.id.list_day_of_month);
+            viewHolder.dayOfWeekAndMonth = (TextView) convertView.findViewById(R.id.list_day_of_week_and_month);
             viewHolder.month = (TextView) convertView.findViewById(R.id.list_month);
 
             // ICON
@@ -44,6 +43,9 @@ public class MyRealmBaseAdapter extends RealmBaseAdapter<RealmWeather>
 
             // TEMPERATURE
             viewHolder.temp = (TextView) convertView.findViewById(R.id.list_temp);
+
+            // TIME
+            viewHolder.time = (TextView) convertView.findViewById(R.id.list_time);
 
             convertView.setTag(viewHolder);
         }
@@ -58,17 +60,34 @@ public class MyRealmBaseAdapter extends RealmBaseAdapter<RealmWeather>
         {
             // DATE
             WeatherDate weatherDate = new WeatherDate(realmWeather.getDtTxt());
-            viewHolder.dayOfWeek.setText(weatherDate.getDayOfWeek());
-            viewHolder.dayOfMonth.setText(weatherDate.getDayOfMonth());
+
+            StringBuilder getDayOfWeekAndMonth = new StringBuilder()
+                    .append(weatherDate.getDayOfWeekShort())
+                    .append(", ")
+                    .append(weatherDate.getDayOfMonth());
+
+            viewHolder.dayOfWeekAndMonth.setText(getDayOfWeekAndMonth.toString());
             viewHolder.month.setText(weatherDate.getMonth());
+
+            // ICON
+            StringBuilder getWeatherIcon = new StringBuilder()
+                    .append("http://openweathermap.org/img/w/")
+                    .append(realmWeather.getIcon())
+                    .append(".png");
+
+            Picasso.with(context).load(getWeatherIcon.toString()).into(viewHolder.weatherIcon);
 
             // TEMPERATURE
             double temp = realmWeather.getTemp();
-            viewHolder.temp.setText(String.valueOf((int) temp) + "°C");
 
-            // ICON
-            String iconUrl = "http://openweathermap.org/img/w/" + realmWeather.getIcon() + ".png";
-            Picasso.with(context).load(iconUrl).into(viewHolder.weatherIcon);
+            StringBuilder getTemp = new StringBuilder()
+                    .append(String.valueOf((int) temp))
+                    .append("°C");
+
+            viewHolder.temp.setText(getTemp.toString());
+
+            // TIME
+            viewHolder.time.setText(weatherDate.getTime());
         }
 
         return convertView;

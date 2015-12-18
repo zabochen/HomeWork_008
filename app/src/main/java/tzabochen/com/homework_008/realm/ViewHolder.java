@@ -6,12 +6,14 @@ import android.widget.TextView;
 public class ViewHolder {
 
     // DATE
-    public TextView dayOfWeek;
-    public TextView dayOfMonth;
+    public TextView dayOfWeekAndMonth;
     public TextView month;
 
     // TEMPERATURE
     public TextView temp;
+
+    // TIME
+    public TextView time;
 
     // ICON
     public ImageView weatherIcon;
