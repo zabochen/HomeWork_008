@@ -177,13 +177,5 @@ public class GetWeatherDate extends AsyncTask<Context, Void, Void>
     {
         // REFRESH ADAPTER
         FragmentItems.adapter.notifyDataSetChanged();
-
-        // SHOW TOAST
-        StringBuilder updateCompleted = new StringBuilder()
-                .append(context.getString(R.string.app_name))
-                .append(": ")
-                .append(context.getString(R.string.toast_update_completed));
-
-        Toast.makeText(context, updateCompleted.toString(), Toast.LENGTH_SHORT).show();
     }
 }

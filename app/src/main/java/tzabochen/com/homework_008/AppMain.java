@@ -71,7 +71,6 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener,
 
         if (actionBar != null)
         {
-            actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(R.string.app_name);
             actionBar.setSubtitle(WeatherCity.city);
         }
@@ -149,10 +148,6 @@ public class AppMain extends AppCompatActivity implements ItemSelectedListener,
     {
         switch (item.getItemId())
         {
-            case android.R.id.home:
-                this.finish();
-                break;
-
             case R.id.menu_item_preferences:
                 Intent intent = new Intent(this, ActivityPreferences.class);
                 startActivity(intent);

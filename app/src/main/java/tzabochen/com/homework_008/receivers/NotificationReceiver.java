@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 
 import tzabochen.com.homework_008.AppMain;
 import tzabochen.com.homework_008.realm.GetWeatherDate;
+import tzabochen.com.homework_008.realm.GetWeatherDateNotify;
 import tzabochen.com.homework_008.services.NotificationTimerTask;
 
 public class NotificationReceiver extends BroadcastReceiver
@@ -35,7 +36,7 @@ public class NotificationReceiver extends BroadcastReceiver
         else if (getIntentAction.equals(NOTIFICATION_UPDATE))
         {
             // START BACKGROUND UPDATE
-            new GetWeatherDate().execute(context);
+            new GetWeatherDateNotify(context).execute(context);
 
             // CANCEL NOTIFICATION & CLOSE STATUS BAR
             notificationManager.cancel(NotificationTimerTask.NOTIFICATION_ID);
